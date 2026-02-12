@@ -16,47 +16,40 @@ body {
 /* Main Container */
 .container {
     width: 100%;
-    max-width: 100vw;      /* desktop width */
-    height: 100vh;
-    margin: auto;
-    background: #fff;
+    height: 100vh;   /* fallback */
+    height: 100dvh;  /* mobile fix */
     display: flex;
     flex-direction: column;
+    background: #fff;
     overflow: hidden;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
 /* Header */
 .header {
     background: rgb(52, 52, 52);
-    padding: 18px;
+    padding: 28px;
     color: white;
-    font-size: 18px;
+    font-size: 32px;
 }
 
 /* User Info */
 .user {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     align-items: center;
 }
 
-.avatar-over {
-    display: flex;
-    align-items: flex-end;
-}
-
 .avatar {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: #ddd;
     border-radius: 50%;
 }
 
 .status {
-    width: 12px;
-    height: 12px;
-    margin-left: -8px;
+    width: 14px;
+    height: 14px;
+    margin-left: -10px;
     border-radius: 50%;
     background: green;
     border: 2px solid #333;
@@ -65,36 +58,39 @@ body {
 .info {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-}
-
-.info p {
-    margin: 0;
 }
 
 .info p:last-child {
-    font-size: 13px;
+    font-size: 20px;
     opacity: 0.8;
 }
 
 /* Chat Area */
 .chat {
     flex: 1;
-    padding: 20px;
+    padding: 30px;
     overflow-y: auto;
 
-    /* Wallpaper */
+       /* IMPORTANT */
+
     background: url("Pics/185.jpeg") center/cover no-repeat;
 }
 
+.chat :last-child{
+display: flex;              /* IMPORTANT */
+    flex-direction: column;  
+}
 /* Message Bubbles */
 .message {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
     max-width: 75%;
-    padding: 12px 16px;
-    margin-bottom: 15px;
-    font-size: 16px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    font-size: 28px;
     background: #fff;
-    border-radius: 15px 15px 0 15px;
+    border-radius: 20px 20px 0 20px;
     align-self: flex-end;
     word-wrap: break-word;
 }
@@ -104,34 +100,37 @@ body {
     background: #4f4f4f;
     color: white;
     align-self: flex-start;
-    border-radius: 15px 15px 15px 0;
+    border-radius: 20px 20px 20px 0;
 }
 
 /* Input Area */
 .input-area {
-    padding: 15px;
+    padding: 20px;
     display: flex;
-    gap: 10px;
+    gap: 15px;
     background: #f0f0f0;
+    align-items: center;
 }
 
+/* Input Field */
 .input-area input {
     flex: 1;
-    padding: 12px 15px;
-    border-radius: 30px;
+    padding: 20px;
+    border-radius: 40px;
     border: 1px solid #ccc;
-    font-size: 15px;
+    font-size: 22px;
     outline: none;
 }
 
+/* Send Button */
 .input-area button {
-    padding: 10px 20px;
+    padding: 18px 28px;
     background: rgb(52, 52, 52);
     border: none;
     color: white;
-    border-radius: 25px;
+    border-radius: 40px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 20px;
     transition: 0.3s;
 }
 
@@ -139,9 +138,9 @@ body {
     background: #000;
 }
 
-/* Scrollbar Style */
+/* Scrollbar */
 .chat::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 .chat::-webkit-scrollbar-thumb {
@@ -149,20 +148,26 @@ body {
     border-radius: 10px;
 }
 
-/* Responsive for Mobile */
+/* Mobile Optimization */
 @media (max-width: 768px) {
-    .container {
-        max-width: 100%;
-        height: 100vh;
-        border-radius: 0;
-    }
 
     .header {
-        font-size: 16px;
-        padding: 15px;
+        font-size: 20px;
+        padding: 18px;
     }
 
     .message {
-        font-size: 14px;
+        font-size: 18px;
+        padding: 14px 18px;
+    }
+
+    .input-area input {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    .input-area button {
+        font-size: 16px;
+        padding: 12px 18px;
     }
 }
