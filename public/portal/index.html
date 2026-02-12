@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Shadow Diaries</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="user">
+            <div class="avatar-over"><div class="avatar"></div><div class="status"></div></div>
+            <div class="info">
+            <p id="user_name">Devadhai👼🖤</p>
+            <p>Online</p>
+            </div>
+           
+        </div>
+    </div>
+
+    <div id="chat" class="chat"><img src="Pics/185.jpeg" alt="" srcset=""><div></div></div>
+
+    <div class="input-area">
+        <input id="messageInput" type="text" placeholder="Type a message">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+</div>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="app.js"></script>
+<script>
+var user_name = localStorage.getItem("user");
+var u_name = JSON.parse(user_name).name;
+document.getElementById("user_name").textContent= u_name;
+
+
+   // connect()
+     setTimeout(() => {
+        console.log("f")
+    addMessage("Happy Valatine's Day Chellam 🖤",true)
+     }, 1000);
+          setTimeout(() => {
+        console.log("f")
+    addMessage("Happy Valatine's Day Chellam 🖤",true)
+     }, 1000);
+     setTimeout(() => {
+    addMessage("Shadow Diaries unlocks with your sweet words 🖤✨",true)
+     }, 2000);
+</script>
+</body>
+</html>
