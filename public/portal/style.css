@@ -38,7 +38,7 @@ body {
     gap: 16px;
     align-items: center;
 }
-
+.avatar-over{ display: flex; align-items: flex-end; }
 .avatar {
     width: 50px;
     height: 50px;
