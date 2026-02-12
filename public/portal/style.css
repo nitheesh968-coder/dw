@@ -2,13 +2,14 @@ body {
     background: #ECE5DD;
     font-family: Arial, sans-serif;
     margin: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
 }
 
 .container {
-    width: 360px;
-    height: 90vh;
+    width: 100VW;
+    height: 100vh;
     background: #fff;
     display: flex;
     flex-direction: column;
