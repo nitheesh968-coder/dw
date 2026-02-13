@@ -11,10 +11,10 @@
 
     <div class="header">
         <div class="user">
-            <div class="avatar-over"><div class="avatar"></div><div class="status"></div></div>
+            <div class="avatar-over"><div class="avatar"></div><div class="status"  id="status_icon"></div></div>
             <div class="info">
             <p id="user_name">Devadhai👼🖤</p>
-            <p>Online</p>
+            <p id="status_name">Getting...</p>
             </div>
            
         </div>
@@ -31,12 +31,10 @@
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <script src="app.js"></script>
 <script>
-var user_name = localStorage.getItem("user");
-var u_name = JSON.parse(user_name).name;
-document.getElementById("user_name").textContent= u_name;
 
+getStatus()
 
-   // connect()
+   connect()
 
           setTimeout(() => {
         console.log("f")

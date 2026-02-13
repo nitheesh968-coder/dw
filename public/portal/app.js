@@ -1,23 +1,155 @@
+var user_name = localStorage.getItem("user");
+var u_name = JSON.parse(user_name).name;
+var user_id = JSON.parse(user_name).username;
+var toUserId  = JSON.parse(user_name).to_username;
+document.getElementById("user_name").textContent= u_name;
+
 let socket;
+let myId;
+
+
+function displayStatus(status){
+  if(status === "Online") {
+document.getElementById("status_name").textContent = status;
+document.getElementById("status_icon").style.background = "green";
+ }
+
+else {
+document.getElementById("status_name").textContent = status;
+document.getElementById("status_icon").style.background = "red";
+}
+}
+
+
+async function getStatus() {
+
+
+  const res = await fetch(`https://${location.host}/user-status/${toUserId}`);
+  const data = await res.json();
+
+  console.log(data, "yy")
+  displayStatus(data.status);
+
+}
+
 
 function connect() {
-  const userId = JSON.parse(localStorage.getItem("user")).username;
-  socket = io();
 
-  socket.emit("user_connected", userId);
+  myId = user_id
 
-  socket.on("receive_message", (data) => {
-    const div = document.createElement("div");
-    div.innerText = `${data.user}: ${data.text}`;
-    document.getElementById("chat").appendChild(div);
+  socket = io("https://${location.host}");
+
+  socket.on("connect", () => {
+
+    socket.emit("user_connected", myId);
+
   });
+
+
+  // RECEIVE MESSAGE
+  socket.on("receive_message", (data) => {
+if( data.from == user_id) return;
+    console.log("message", data)
+
+
+
+addMessage(data.text, true)
+
+ /*   const div = document.createElement("div");
+
+
+    div.innerHTML =
+      `<b>${data.from}</b>: ${data.text} 
+      <small>${data.time}</small>`;
+
+    document.getElementById("chat").appendChild(div);*/
+
+  });
+
+socket.on("connect_update", ({status, userId}) => {
+  if(userId === user_name) return;
+document.getElementById("status_name").textContent = status;
+document.getElementById("status_icon").style.background = "green";
+ });
+
+socket.on("disconnect_update", ({status, userId}) => {
+if(userId === user_name) return;
+document.getElementById("status_name").textContent = status;
+document.getElementById("status_icon").style.background = "red";
+ });
+
+
+  // ONLINE USERS 
+ /* socket.on("online_users", (users) => {
+
+    document.getElementById("onlineUsers").innerHTML =
+      users.join("<br>");
+
+  }); */
+
+
+  // TYPING
+  socket.on("typing", ({ from }) => {
+
+    document.getElementById("typingStatus").innerText =
+      from + " is typing...";
+
+  });
+
+
+  socket.on("stop_typing", () => {
+
+    document.getElementById("typingStatus").innerText = "";
+
+  });
+
 }
+
+
+
+function sendMessage() {
+
+ 
+
+  const message = document.getElementById("messageInput").value;
+console.log(toUserId)
+ addMessage(message); 
+  socket.emit("send_message", {
+    toUserId,
+    message
+  });
+
+  document.getElementById("messageInput").value = "";
+
+}
+
+
+
+let typingTimeout;
+
+function typing() {
+
+  
+
+  socket.emit("typing", { toUserId });
+
+  clearTimeout(typingTimeout);
+
+  typingTimeout = setTimeout(() => {
+
+    socket.emit("stop_typing", { toUserId });
+
+  }, 1000);
+
+}
+
 
 function send() {
   const text = document.getElementById("msg").value;
   socket.emit("send_message", {
-    user: document.getElementById("userId").value,
-    text
+    user: user_id,
+    text,
+    to_user: to_user_id
   });
 }
 
@@ -28,10 +160,3 @@ function addMessage(text, isReply = false) {
    chat.scrollTop = chat.scrollHeight; 
   } 
 
-   function sendMessage() { 
-    const input = document.getElementById("messageInput"); 
-    const text = input.value.trim(); if (text === "") return; 
-
-    addMessage(text); 
-    input.value = ""; 
-  }
