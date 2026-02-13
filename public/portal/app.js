@@ -20,11 +20,11 @@ document.getElementById("status_icon").style.background = "red";
 }
 }
 
-
+const url =  "https://" +location.host
 async function getStatus() {
 
 
-  const res = await fetch(`https://${location.host}/user-status/${toUserId}`);
+  const res = await fetch(`${url}/user-status/${toUserId}`);
   const data = await res.json();
 
   console.log(data, "yy")
@@ -37,7 +37,7 @@ function connect() {
 
   myId = user_id
 
-  socket = io("https://${location.host}");
+  socket = io(url);
 
   socket.on("connect", () => {
 
