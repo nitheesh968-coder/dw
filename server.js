@@ -42,11 +42,37 @@ console.log(nom, nom.password, "ll")
 
 app.get("/user-status/:username", async (req, res) => {
 
-  const user = await user_DB.findOne({ username: req.params.username });
+  const user = await user_DB.find({ username: req.params.username });
+
+  find({
+        $or: [
+            { sender: sender, receiver: receiver },
+            { sender: receiver, receiver: sender }
+        ]
+    }).sort({ createdAt: 1 });
+
 const status = user.status;
 console.log(status, user)
   res.json({
    status
+  });
+
+});
+
+app.get("/user-msgs/:username", async (req, res) => {
+
+ var from = req.params.username.split("$")[0];
+var to = req.params.to_username.split("$")[1];
+
+  const msgs = await user_DB.find({
+        $or: [
+            { from: from, to: to },
+            { from: to, to: from }
+        ]
+    }).sort({ r_time: 1 });
+console.log(msgs)
+  res.json({
+  msgs
   });
 
 });
