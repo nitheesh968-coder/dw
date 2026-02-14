@@ -40,10 +40,10 @@ function displayoldmsgs (msgs){
 msgs.forEach(msg => {
   
 if(msg.from === user_id){
-  addMessage(msg.text)
+  addMessage(msg.text, msg.time)
 }
 else{
-  addMessage (msg.text, true)
+  addMessage (msg.text, msg.time, true)
 }
 
 });
@@ -83,7 +83,7 @@ if( data.from == user_id) return;
 
 
 
-addMessage(data.text, true)
+addMessage(data.text, data.time, true)
 
  /*   const div = document.createElement("div");
 
@@ -184,10 +184,29 @@ function send() {
   });
 }
 
-function addMessage(text, isReply = false) {
-   const chat = document.getElementById("chat").children[1]; 
-   const msg = document.createElement("div"); msg.className = "message" + (isReply ? " reply" : ""); 
-   msg.textContent = text; chat.appendChild(msg); 
-   chat.scrollTop = chat.scrollHeight; 
-  } 
+function addMessage(text, time, isReply = false) {
+  const chat = document.getElementById("chat").children[1];
+
+  const msg = document.createElement("div");
+  msg.className = "message" + (isReply ? " reply" : "");
+
+  // Message content
+  const msg_over = document.createElement("div");
+  msg_over.className = "message-text";
+  msg_over.textContent = text;
+
+  // Time
+  const msg_time = document.createElement("div");
+  msg_time.className = "message-time";
+  msg_time.textContent = time;
+
+  // Append inside message
+  msg.appendChild(msg_over);
+  msg.appendChild(msg_time);
+
+  // Append message to chat
+  chat.appendChild(msg);
+  chat.scrollTop = chat.scrollHeight;
+}
+
 

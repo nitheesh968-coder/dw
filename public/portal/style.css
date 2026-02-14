@@ -94,7 +94,11 @@ display: flex;              /* IMPORTANT */
     align-self: flex-end;
     word-wrap: break-word;
 }
-
+.message-time{
+    display: flex;
+    align-items: end;
+    font-size: 18px;
+}
 /* Reply Bubble */
 .reply {
     background: #4f4f4f;
