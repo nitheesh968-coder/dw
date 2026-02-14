@@ -100,17 +100,17 @@ io.emit("connect_update", ({status: "Online", userId}));
 
 
   // PRIVATE MESSAGE
-  socket.on("send_message", ({ toUserId, message }) => {
+  socket.on("send_message",  async ({ toUserId, message }) =>{
 
     const time = new Date().toLocaleTimeString();
-var inti_msg =  message_DB.insertOne({from: socket.userId, to: toUserId,  text: message, r_time:time,s_time:"",seen_time:"", status : "Sent"})
+var inti_msg = await message_DB.insertOne({from: socket.userId, to: toUserId,  text: message, r_time:time,s_time:"",seen_time:"", status : "Sent"})
     const payload = {
       from: socket.userId,
       text: message,
       time: time
     };
     console.log(inti_msg, inti_msg._id)
-message_DB.updateOne({_id:inti_msg._id},{ $set: {status: "Delivered",s_time:time}})
+await message_DB.updateOne({_id:inti_msg._id},{ $set: {status: "Delivered",s_time:time}})
 
 console.log("To User : ", toUserId)
     // send to receiver
