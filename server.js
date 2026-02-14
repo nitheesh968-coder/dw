@@ -29,7 +29,8 @@ mongoose.connect(url)
   .catch(err => console.error(err));
 
    var conn = mongoose.connection;
- var user_DB = conn.collection('Users')
+ var user_DB = conn.collection('Users');
+ var message_DB = conn.collection("Messages")
   
  async function gg (){
  var conn = mongoose.connection;
@@ -102,12 +103,14 @@ io.emit("connect_update", ({status: "Online", userId}));
   socket.on("send_message", ({ toUserId, message }) => {
 
     const time = new Date().toLocaleTimeString();
-
+var inti_msg =  message_DB.insertOne({from, to: toUserId, text, r_time:time,s_time:"",seen_time:"", status : "Sent"})
     const payload = {
       from: socket.userId,
       text: message,
       time: time
     };
+message_DB.updateOne({_id:inti_msg._id},{ $set: {status: "Delivered",r_time:time}})
+
 console.log("To User : ", toUserId)
     // send to receiver
     io.to(toUserId).emit("receive_message", payload);
