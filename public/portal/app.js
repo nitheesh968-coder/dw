@@ -9,12 +9,15 @@ let myId;
 
 
 function displayStatus(status){
+
   if(status === "Online") {
+     console.log(status,"Connect Online")
 document.getElementById("status_name").textContent = status;
 document.getElementById("status_icon").style.background = "green";
  }
 
 else {
+      console.log(status,"Connect Offline")
 document.getElementById("status_name").textContent = status;
 document.getElementById("status_icon").style.background = "red";
 }
@@ -95,6 +98,7 @@ addMessage(data.text, true)
 
 socket.on("connect_update", ({status, userId}) => {
   if(userId === user_name) return;
+  console.log("Connect")
 document.getElementById("status_name").textContent = status;
 document.getElementById("status_icon").style.background = "green";
  });
