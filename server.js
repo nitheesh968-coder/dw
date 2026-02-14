@@ -103,7 +103,7 @@ io.emit("connect_update", ({status: "Online", userId}));
   socket.on("send_message", ({ toUserId, message }) => {
 
     const time = new Date().toLocaleTimeString();
-var inti_msg =  message_DB.insertOne({from, to: toUserId, text, r_time:time,s_time:"",seen_time:"", status : "Sent"})
+var inti_msg =  message_DB.insertOne({from: socket.userId, to: toUserId,  text: message, r_time:time,s_time:"",seen_time:"", status : "Sent"})
     const payload = {
       from: socket.userId,
       text: message,
