@@ -144,7 +144,11 @@ function sendMessage() {
 
   const message = document.getElementById("messageInput").value;
 console.log(toUserId)
- addMessage(message); 
+    const time = new Date().toLocaleTimeString('en-GB', {
+    timeZone: 'Asia/Kolkata',
+    hour12: false
+});
+ addMessage(message, time); 
   socket.emit("send_message", {
     toUserId,
     message
