@@ -27,11 +27,25 @@ async function getStatus() {
   const res = await fetch(`${url}/user-status/${toUserId}`);
   const data = await res.json();
 
-  console.log("Messages:",data)
-//  displayStatus(data.status);
+  console.log(data.status)
+  displayStatus(data.status);
 
 }
 
+function displayoldmsgs (mgs){
+
+msgs.forEach(msg => {
+  
+if(mgs.from === user_id){
+  addMessage(msg.text)
+}
+else{
+  addMessage (msg.text, true)
+}
+
+});
+
+}
 
 async function getMsgs() {
 
@@ -39,8 +53,9 @@ async function getMsgs() {
   const res = await fetch(`${url}/user-msgs/${user_id+"$"+toUserId}`);
   const data = await res.json();
 
-  console.log(data, "yy")
-  displayStatus(data.status);
+  console.log("Messages:", data.msgs)
+  
+ // displayStatus(data.status);
 
 }
 
