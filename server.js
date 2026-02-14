@@ -121,7 +121,10 @@ io.emit("connect_update", ({status: "Online", userId}));
   // PRIVATE MESSAGE
   socket.on("send_message",  async ({ toUserId, message }) =>{
 
-    const time = new Date().toLocaleTimeString();
+    const time = new Date().toLocaleTimeString('en-GB', {
+    timeZone: 'Asia/Kolkata',
+    hour12: false
+});
 var inti_msg = await message_DB.insertOne({from: socket.userId, to: toUserId,  text: message, r_time:time,s_time:"",seen_time:"", status : "Sent"})
     const payload = {
       from: socket.userId,

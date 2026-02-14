@@ -84,6 +84,7 @@ display: flex;              /* IMPORTANT */
 .message {
     display: flex;
     flex-direction: column;
+    gap: 3px;
     width: fit-content;
     max-width: 75%;
     padding: 18px 22px;
@@ -97,7 +98,7 @@ display: flex;              /* IMPORTANT */
 .message-time{
     display: flex;
     align-items: end;
-    font-size: 18px;
+    font-size: 14px;
 }
 /* Reply Bubble */
 .reply {
