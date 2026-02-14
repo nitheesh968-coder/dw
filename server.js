@@ -64,7 +64,7 @@ app.get("/user-msgs/:username", async (req, res) => {
  var from = req.params.username.split("$")[0];
 var to = req.params.to_username.split("$")[1];
 
-  const msgs = await user_DB.find({
+  const msgs = await message_DB.find({
         $or: [
             { from: from, to: to },
             { from: to, to: from }
