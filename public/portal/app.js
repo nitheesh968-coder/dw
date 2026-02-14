@@ -98,7 +98,7 @@ addMessage(data.text, true)
 
 socket.on("connect_update", ({status, userId}) => {
   if(userId === user_name) return;
-  console.log("Connect")
+  console.log(user_name,userId,"Connect")
 document.getElementById("status_name").textContent = status;
 document.getElementById("status_icon").style.background = "green";
  });
