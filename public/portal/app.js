@@ -38,12 +38,12 @@ async function getStatus() {
 function displayoldmsgs (msgs){
 
 msgs.forEach(msg => {
-  
+  console.log(msg)
 if(msg.from === user_id){
-  addMessage(msg.text, msg.time)
+  addMessage(msg.text, msg.r_time)
 }
 else{
-  addMessage (msg.text, msg.time, true)
+  addMessage (msg.text, msg.r_time, true)
 }
 
 });
