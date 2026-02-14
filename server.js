@@ -44,13 +44,6 @@ app.get("/user-status/:username", async (req, res) => {
 
   const user = await user_DB.find({ username: req.params.username });
 
-  find({
-        $or: [
-            { sender: sender, receiver: receiver },
-            { sender: receiver, receiver: sender }
-        ]
-    }).sort({ createdAt: 1 });
-
 const status = user.status;
 console.log(status, user)
   res.json({
