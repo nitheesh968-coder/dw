@@ -62,7 +62,7 @@ var to = us_string.split("$")[1];
             { from: from, to: to },
             { from: to, to: from }
         ]
-    }).sort({ r_time: 1 });
+    }).sort({ r_time: 1 }).toArray();
 console.log(msgs)
   res.json({
   msgs
