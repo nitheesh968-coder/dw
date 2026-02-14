@@ -32,11 +32,11 @@ async function getStatus() {
 
 }
 
-function displayoldmsgs (mgs){
+function displayoldmsgs (msgs){
 
 msgs.forEach(msg => {
   
-if(mgs.from === user_id){
+if(msg.from === user_id){
   addMessage(msg.text)
 }
 else{
@@ -54,7 +54,7 @@ async function getMsgs() {
   const data = await res.json();
 
   console.log("Messages:", data.msgs)
-  
+  displayoldmsgs (data.msgs)
  // displayStatus(data.status);
 
 }
