@@ -27,7 +27,7 @@ async function getStatus() {
   const res = await fetch(`${url}/user-status/${toUserId}`);
   const data = await res.json();
 
-  console.log(data.status)
+  console.log(data)
   displayStatus(data.status);
 
 }
