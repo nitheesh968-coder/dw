@@ -42,9 +42,9 @@ console.log(nom, nom.password, "ll")
 
 app.get("/user-status/:username", async (req, res) => {
 
-  const user = await user_DB.find({ username: req.params.username });
+  const user = await user_DB.find({ username: req.params.username }).toArray();
 
-const status = user.status;
+const status = user[0].status;
 console.log(status, user)
   res.json({
    status
