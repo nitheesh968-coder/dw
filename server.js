@@ -109,8 +109,8 @@ var inti_msg = await message_DB.insertOne({from: socket.userId, to: toUserId,  t
       text: message,
       time: time
     };
-    console.log(inti_msg, inti_msg._id)
-await message_DB.updateOne({_id:inti_msg._id},{ $set: {status: "Delivered",s_time:time}})
+    console.log(inti_msg, inti_msg.insertedId)
+await message_DB.updateOne({_id:inti_msg.insertedId},{ $set: {status: "Delivered",s_time:time}})
 
 console.log("To User : ", toUserId)
     // send to receiver
