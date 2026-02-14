@@ -53,9 +53,9 @@ console.log(status, user)
 });
 
 app.get("/user-msgs/:username", async (req, res) => {
-
- var from = req.params.username.split("$")[0];
-var to = req.params.to_username.split("$")[1];
+var us_string = req.params.username
+ var from = us_string.split("$")[0];
+var to = us_string.split("$")[1];
 
   const msgs = await message_DB.find({
         $or: [
