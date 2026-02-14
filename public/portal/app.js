@@ -104,7 +104,7 @@ document.getElementById("status_icon").style.background = "green";
  });
 
 socket.on("disconnect_update", ({status, userId}) => {
-if(userId === user_name) return;
+if(userId !== user_name) return;
 document.getElementById("status_name").textContent = status;
 document.getElementById("status_icon").style.background = "red";
  });
